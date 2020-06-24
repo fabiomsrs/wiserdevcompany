@@ -44,8 +44,10 @@
                 {{category.name}} ,
                 {% endfor %}
             </td>
-            <td>
-                <a href="/post/{{post.slug}}">detalhe</a>
+            <td>                
+                <a href="/post/{{post.slug}}">
+                    <ion-icon name="eye-outline"/>
+                </a>                                
             </td>
         </tr>
         {% empty %}
