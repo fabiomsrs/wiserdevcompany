@@ -1,6 +1,28 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block body %}
+<form method="get">
+    <div>        
+        <div class="row">
+            <div class="form-group col-sm-4 col-md-3">
+                Título
+                {% render_field filter.form.title class="form-control" %}
+            </div>
+            <div class="form-group col-sm-4 col-md-3">
+                Categoria
+                {% render_field filter.form.categories class="form-control" %}
+            </div>            
+            <div class="form-group col-sm-4 col-md-3">
+                Conteúdo
+                {% render_field filter.form.content class="form-control" %}
+            </div>            
+        </div>
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">
+            Search
+        </button>
+    </div>
+</form>
 <table class="table mt-3">
     <thead class="thead-dark">
         <tr>
@@ -17,15 +39,15 @@
             <th scope="row">{{forloop.counter}}</th>
             <td>{{post.title}}</td>
             <td>{{post.content}}</td>
-            <td>                
-                {% for category in post.categories.all %}                    
-                    {{category.name}} ,                        
-                {% endfor %}                
+            <td>
+                {% for category in post.categories.all %}
+                {{category.name}} ,
+                {% endfor %}
             </td>
-            <td>                
+            <td>
                 <a href="#">detalhe</a>
             </td>
-        </tr>        
+        </tr>
         {% empty %}
         <tr>
             <td colspan="4">
@@ -35,27 +57,25 @@
         {% endfor %}
     </tbody>
 </table>
-{% if is_paginated %}
-    <nav>
-        <ul class="pagination">
+<nav>
+    <ul class="pagination">
         {% if page_obj.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
         {% else %}
-            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+        <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
         {% endif %}
         {% for i in paginator.page_range %}
-            {% if page_obj.number == i %}
-            <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
-            {% else %}
-            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-            {% endif %}
+        {% if page_obj.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
         {% else %}
-            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
         {% endif %}
-        </ul>
-    </nav>
-{% endif %}
+    </ul>
+</nav>
 {% endblock %}
