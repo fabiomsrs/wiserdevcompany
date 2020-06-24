@@ -10,8 +10,7 @@ from .models import Post, Category
 # Create your views here.
 
 class IndexView(generic.ListView):
+    model = Post
+    paginate_by = 2
     template_name = 'core/index.html'
     context_object_name = 'post_list'
-
-    def get_queryset(self):        
-        return Post.objects.all()
