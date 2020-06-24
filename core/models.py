@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 
 class Post(models.Model):
     slug = models.SlugField(max_length=200, null=True, blank=True)
-    title = models.CharField(max_length=50, verbose_name="título")
+    title = models.CharField(max_length=50, verbose_name="título", unique=True)
     content = models.CharField(max_length=50, verbose_name="conteúdo")
     publicacao = models.TextField(max_length=140)
     data_publicacao = models.DateTimeField(auto_now=True, editable=False, verbose_name="data de publicação")
@@ -21,7 +21,7 @@ class Post(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, verbose_name="nome")
+    name = models.CharField(max_length=50, verbose_name="nome", unique=True)
     slug = models.SlugField(max_length=200, null=True, blank=True)
 
     def __str__(self):
