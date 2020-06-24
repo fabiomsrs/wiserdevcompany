@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="card mt-3">
+    <div class="card-header">
+        <h4 class="card-title">{{post.title|title}}</h5>
+        <h6 class="card-subtitle text-muted">{{post.content}}</h5>
+        categorias: 
+        {% for category in post.categories.all %}             
+            {% if not forloop.last %}
+            {{category.name}},
+            {% else %}
+            {{category.name}}.
+            {% endif %}
+
+        {% endfor %}
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>{{post.publicacao}}</p>
+        <footer class="blockquote-footer">{{post.data_publicacao}}</footer>
+      </blockquote>
+    </div>
+  </div>
+{% endblock %}
