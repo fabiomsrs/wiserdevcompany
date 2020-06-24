@@ -1,4 +1,38 @@
 {% extends 'base.html' %}
 
-{% block body %}    
+{% block body %}
+<table class="table mt-3">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Título</th>
+            <th scope="col">Conteúdo</th>
+            <th scope="col">Categorias</th>
+            <th scope="col">Detalhe</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in post_list %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{post.title}}</td>
+            <td>{{post.content}}</td>
+            <td>                
+                {% for category in post.categories.all %}                    
+                    {{category.name}} ,                        
+                {% endfor %}                
+            </td>
+            <td>                
+                <a href="#">detalhe</a>
+            </td>
+        </tr>        
+        {% empty %}
+        <tr>
+            <td colspan="4">
+                Sorry, there's no posts yet.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -11,7 +11,7 @@ from .models import Post, Category
 
 class IndexView(generic.ListView):
     template_name = 'core/index.html'
-    # context_object_name = 'post_list'
+    context_object_name = 'post_list'
 
     def get_queryset(self):        
         return Post.objects.all()
